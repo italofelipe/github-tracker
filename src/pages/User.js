@@ -1,12 +1,8 @@
 import React from "react";
-import {View, Text} from "react-native";
+import {View} from "react-native";
 
-const User = () => {
-  return (
-    <View>
-      <Text>User component</Text>
-    </View>
-  );
+const User = (props) => {
+  return <View>{props.children}</View>;
 };
 
 export default User;
