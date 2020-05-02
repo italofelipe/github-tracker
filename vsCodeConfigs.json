@@ -1,0 +1,75 @@
+{
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.activityBar.visible": true,
+	"workbench.sideBar.location": "left",
+	"editor.fontSize": 14,
+	"editor.tabSize": 2,
+	"editor.fontFamily": "Consolas, 'Courier New', monospace",
+	"editor.fontLigatures": false,
+	"editor.formatOnSave": false,
+	"editor.autoIndent": true,
+	"editor.formatOnPaste": true,
+	"vetur.validation.template": false,
+	"eslint.autoFixOnSave": true,
+	"eslint.alwaysShowStatus": true,
+	"eslint.validate": [
+		{
+			"language": "html",
+			"autoFix": true
+		},
+		{
+			"language": "javascript",
+			"autoFix": true
+		},
+		{
+			"language": "typescript",
+			"autoFix": true
+		},
+		{
+			"language": "react",
+			"autoFix": true
+		},
+		{
+			"language": "[vue]",
+			"autoFix": true
+		}
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"[html]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": false
+		},
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"[javascript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": false
+		},
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"[typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": false
+		}
+	},
+	"[json]": {
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "octref.vetur"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"workbench.colorTheme": "Dracula",
+	"[css]": {
+		"editor.defaultFormatter": "remimarsal.prettier-now"
+	},
+	"editor.defaultFormatter": "vscode.emmet"
+}
