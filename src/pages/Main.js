@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {Keyboard} from "react-native";
+import React, {useState} from "react";
+import {Keyboard, ActivityIndicator} from "react-native";
+import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {
   Container,
@@ -8,23 +9,29 @@ import {
   SubmitButton,
   List,
   User,
+  UserContainer,
   Avatar,
   Name,
   Bio,
   Company,
   Location,
-  ProfileButton,
-  ProfileButtonText
+  LeftWrapper,
+  Wrapper,
+  LowerWrapper
 } from "../styles/index";
 import http from "../services/http";
 
-const Main = () => {
+const Main = (props) => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState("");
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
+  const [loading, setLoading] = useState(false);
+
+  const handleNavigate = (user) => {
+    const {navigation} = props;
+    navigation.navigate("User", {user});
+  };
   const handleAddUser = async () => {
+    setLoading(true);
     try {
       const response = await http.get(`/users/${newUser}`);
       const data = {
@@ -42,6 +49,8 @@ const Main = () => {
       console.log(users);
       // setUsers(...users, data);
       setUsers([...users, data]);
+      setLoading(false);
+
       setNewUser("");
       Keyboard.dismiss();
     } catch (err) {
@@ -61,28 +70,53 @@ const Main = () => {
           returnKeyType="send"
           onSubmitEditing={handleAddUser}
         />
-        <SubmitButton onPress={handleAddUser}>
-          <Icon name="add" size={20} color="#FFF" />
+        <SubmitButton loading={loading} onPress={handleAddUser}>
+          {loading ? (
+            <ActivityIndicator color="#FFF" />
+          ) : (
+            <Icon name="add" size={20} color="#FFF" />
+          )}
         </SubmitButton>
       </Form>
       <List
         data={users}
         keyExtractor={(user) => user.id}
         renderItem={({item}) => (
-          <User>
-            <Avatar source={{uri: item.avatar}} />
-            <Name>{item.name}</Name>
-            <Bio>{item.bio}</Bio>
-            <Company>{item.company}</Company>
-            <Location>{item.location}</Location>
-            <ProfileButton onPress={() => {}}>
-              <ProfileButtonText>Ver perfil</ProfileButtonText>
-            </ProfileButton>
+          <User
+            availability={item.hireable}
+            onPress={() => handleNavigate(item)}>
+            <UserContainer underlayColor="#DDD" activeOpacity={0.6}>
+              <LeftWrapper>
+                <Avatar source={{uri: item.avatar}} />
+              </LeftWrapper>
+              <Wrapper>
+                <Name>{item.name}</Name>
+                <Bio>{item.bio}</Bio>
+
+                <LowerWrapper>
+                  <Company>
+                    <Icon name="business-center" size={14} color="#333" />
+
+                    {item.company}
+                  </Company>
+                  <Location>
+                    <Icon name="location-city" size={14} color="#333" />
+
+                    {item.location}
+                  </Location>
+                </LowerWrapper>
+              </Wrapper>
+            </UserContainer>
           </User>
         )}
       />
     </Container>
   );
+};
+Main.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  }).isRequired
 };
 
 export default Main;

@@ -5,8 +5,6 @@ import Routes from "./routes";
 import Main from "./pages/Main";
 
 const App = () => {
-  // If ReactoTron is installed
-  console.tron.log('Hello Reactotron')
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#468C98" />
